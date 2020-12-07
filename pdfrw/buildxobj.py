@@ -90,7 +90,7 @@ class ViewInfo(object):
                 assert len(value) == 4
                 setattr(self, key, [float(x) for x in value])
             else:
-                log.error('Unknown option: %s', key)
+                log.info('Unknown option: %s', key)
         for key, value in iteritems(kw):
             assert hasattr(self, key), key
             setattr(self, key, value)

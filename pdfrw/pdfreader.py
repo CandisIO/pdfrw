@@ -435,7 +435,7 @@ class PdfReader(PdfDict):
                         setdefault((objnum, generation), offset)
                     objnum += 1
                 elif tokens:
-                    log.error('Invalid line in xref table: %s' %
+                    log.info('Invalid line in xref table: %s' %
                               repr(line))
                     raise ValueError
             log.warning('Badly formatted xref table')
@@ -486,11 +486,11 @@ class PdfReader(PdfDict):
                 elif nodetype == catalogname:
                     stack.append(node[pagesname])
                 else:
-                    log.error('Expected /Page or /Pages dictionary, got %s' %
+                    log.info('Expected /Page or /Pages dictionary, got %s' %
                             repr(node))
             return result
         except (AttributeError, TypeError) as s:
-            log.error('Invalid page tree: %s' % s)
+            log.info('Invalid page tree: %s' % s)
             return []
 
     def _parse_encrypt_info(self, source, password, trailer):
