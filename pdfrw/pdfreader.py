@@ -68,7 +68,7 @@ class PdfReader(PdfDict):
         tok = next()
         while tok != '>>':
             if not tok.startswith('/'):
-                source.error('Expected PDF /name object')
+                #source.error('Expected PDF /name object')
                 tok = next()
                 continue
             key = tok
@@ -361,15 +361,18 @@ class PdfReader(PdfDict):
         ok = ok and objid[1] == 'obj'
         ok = ok and objid[2] == '<<'
         if not ok:
-            source.exception('Expected xref stream start')
+            pass
+            #source.exception('Expected xref stream start')
         obj = self.readdict(source)
         if obj.Type != PdfName.XRef:
-            source.exception('Expected dict type of /XRef')
+            pass
+            #source.exception('Expected dict type of /XRef')
         tok = next()
         self.readstream(obj, self.findstream(obj, tok, source), source, True)
         old_strm = obj.stream
         if not uncompress([obj], True):
-            source.exception('Could not decompress Xref stream')
+            pass
+            #source.exception('Could not decompress Xref stream')
         stream = obj.stream
         # Fix for issue #76 -- goofy compressed xref stream
         # that is NOT ACTUALLY COMPRESSED
@@ -379,7 +382,8 @@ class PdfReader(PdfDict):
         num_pairs = zip(num_pairs[0::2], num_pairs[1::2])
         entry_sizes = [int(x) for x in obj.W]
         if len(entry_sizes) != 3:
-            source.exception('Invalid entry size')
+            pass
+            #source.exception('Invalid entry size')
         object_streams = defaultdict(list)
         get = readint(stream, entry_sizes)
         for objnum, size in num_pairs:
@@ -462,7 +466,8 @@ class PdfReader(PdfDict):
                 source.exception('Expected "<<" starting catalog')
             return self.readdict(source), False
         else:
-            source.exception('Expected "xref" keyword or xref stream object')
+            pass
+            #source.exception('Expected "xref" keyword or xref stream object')
 
     def readpages(self, node):
         pagename = PdfName.Page
