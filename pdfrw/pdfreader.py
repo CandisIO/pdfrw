@@ -136,7 +136,8 @@ class PdfReader(PdfDict):
             return
 
         if exact_required:
-            source.exception('Expected endstream endobj')
+            pass
+            #source.exception('Expected endstream endobj')
 
         # The length attribute does not match the distance between the
         # stream and endstream keywords.
@@ -335,7 +336,8 @@ class PdfReader(PdfDict):
         if not tableloc.isdigit():
             source.exception('Expected table location')
         if source.next_default().rstrip().lstrip('%') != 'EOF':
-            source.exception('Expected %%EOF')
+            pass
+            #source.exception('Expected %%EOF')
         return startloc, PdfTokens(fdata, int(tableloc), True, self.verbose)
 
     def parse_xref_stream(self, source, int=int, range=range,
